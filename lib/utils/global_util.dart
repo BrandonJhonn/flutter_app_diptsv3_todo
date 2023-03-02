@@ -1,3 +1,3 @@
-const String WS_URL = "todo.ly";
-const String USER = "ucb@diplomado.com";
-const String PASSWORD = "ucbdiplomado";
+const String WS_URL = "dG9kby5seQ==";
+const String USER = "dWNiQGRpcGxvbWFkby5jb20=";
+const String PASSWORD = "dWNiZGlwbG9tYWRv";
