@@ -11,12 +11,13 @@ class LoginService
 {
   Future<UserModel> loginUser(String vStrUser, String vStrPassword) async {
     try {
+      Codec<String, String> stringToBase64 = utf8.fuse(base64);
 
       String strBasicAuth = "Basic ";
       strBasicAuth += base64.encode(utf8.encode('$vStrUser:$vStrPassword'));
 
       final http.Response response = await http.get(
-        Uri.https(global.WS_URL, '/api/authentication/token.json'),
+        Uri.https(stringToBase64.decode(global.WS_URL), '/api/authentication/token.json'),
         headers: <String, String>{'authorization' : strBasicAuth}
       );
 
