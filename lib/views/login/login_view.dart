@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,6 +10,7 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Codec<String, String> stringToBase64 = utf8.fuse(base64);
     final loginBloc = BlocProvider.of<LoginBloc>(context, listen: false);
 
     return Scaffold(
@@ -33,9 +35,11 @@ class LoginView extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
+        key: const Key('login'),
+        tooltip: 'login',
         child: const Icon(Icons.arrow_circle_up),
         onPressed: () {
-          loginBloc.add(LoginUser(global.USER, global.PASSWORD));
+          loginBloc.add(LoginUser(stringToBase64.decode(global.USER), stringToBase64.decode(global.PASSWORD)));
         },
       ),
     );

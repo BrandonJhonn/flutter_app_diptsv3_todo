@@ -20,8 +20,6 @@ class LoginService
         headers: <String, String>{'authorization' : strBasicAuth}
       );
 
-      print("servicios");
-
       if (response.statusCode == 200) {
         return UserModel.fromJson(jsonDecode(response.body));
       } else {
@@ -29,7 +27,6 @@ class LoginService
       }
 
     } on PlatformException catch (e) {
-      /// print("WS ERROR: " + e.toString());
       rethrow;
     }
   }
