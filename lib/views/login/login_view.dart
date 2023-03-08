@@ -23,19 +23,22 @@ class LoginView extends StatelessWidget {
           ? Center(
             child: Column(
               children: [
-                Text(state.user!.email),
+                Text(key: const ValueKey('email-text'), state.user!.email),
                 Text(state.user!.token),
                 Text(state.user!.expirationTime.toString())
               ]
             ),
           )
           : const Center(
-            child: Text('No existe informacion de Usuario'),
+            child: Text(
+              'No existe informacion de Usuario',
+              key: ValueKey('default-text'),
+              ),
           );
         },
       ),
       floatingActionButton: FloatingActionButton(
-        key: const Key('login'),
+        key: const ValueKey('login'),
         tooltip: 'login',
         child: const Icon(Icons.arrow_circle_up),
         onPressed: () {
