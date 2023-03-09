@@ -1,8 +1,13 @@
 Feature: Login Features
-  Test add features
+  Test Login with valid and invalid credentials
 
 
   Scenario: Test Login with valid credentials
-    Given I test the initial state of the app
-    # And I click the login button
-    # Then I see if the value is "ucb@diplomado.com"
+    Given I set a valid credencials in login page
+    And I click the "btn-login" button
+    Then I see if the value in "txt-message" is "Acceso Correcto"
+
+  Scenario: Test Login with invalid credentials
+    Given I set a invalid credencials in login page
+    And I click the "btn-login" button
+    Then I see if the value in "txt-message" is "Acceso Incorrecto"
