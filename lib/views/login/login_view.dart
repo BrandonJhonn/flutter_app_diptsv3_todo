@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../bloc/login/login_bloc.dart';
 import '../../utils/global_util.dart' as global;
+import '../../views/widgets/toast_widget.dart' as alert;
 
 
 
@@ -40,9 +41,6 @@ class LoginViewState extends State<LoginView> {
     final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Login')
-      ),
       body: BlocBuilder<LoginBloc, LoginState>(
         builder: (_, state) {
           return Scaffold(
@@ -68,16 +66,42 @@ class LoginViewState extends State<LoginView> {
                       child: Column(
                         children: [
                           TextFormField(
+                            key: const ValueKey('frm-user'),
                             controller: ctrUsuario,
-                            decoration: const InputDecoration(border: OutlineInputBorder()),
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              hintText: "Correo/Usuario"
+                            ),
                           ),
                           const SizedBox(
                             height: 24.0,
                           ),
                           TextFormField(
+                            key: const ValueKey('frm-password'),
                             controller: ctrPassword,
                             obscureText: true,
-                            decoration: const InputDecoration(border: OutlineInputBorder()),
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              hintText: "Password"
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 24.0,
+                          ),
+                          ElevatedButton(
+                            key: const ValueKey('btn-login'),
+                            style: ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20)),
+                            onPressed: () {
+                              loginBloc.add(LoginUser(ctrUsuario.text, ctrPassword.text));
+
+                              if (state.isActive) {
+                                alert.ToastAlertUtil.alertaToast("Acceso Correcto", true);
+                              }
+                              else {
+                                alert.ToastAlertUtil.alertaToast("Acceso Incorrecto", false);
+                              }
+                            },
+                            child: const Text('Ingresar'),
                           ),
                         ],
                       )

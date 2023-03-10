@@ -2,9 +2,10 @@ import 'package:flutter_driver/flutter_driver.dart';
 
 class LoginPage {
 
-  final defaultTextFinder = find.byValueKey('default-text');
-  final emailTextFinder = find.byValueKey('email-text');
-  final btnLogin = find.byValueKey('login');
+  final inputUserFinder = find.byValueKey('frm-user');
+  final inputPasswordFinder = find.byValueKey('frm-password');
+  final btnLogin = find.byValueKey('btn-login');
+  final textResultFinder = find.byValueKey('txt-result');
 
   late FlutterDriver _driver;
 
@@ -12,15 +13,24 @@ class LoginPage {
     _driver = driver;
   }
 
-  Future<String> getEmailTextValue() async {
-    return await _driver.getText(emailTextFinder);
-  }
-
-  Future<String> getDefaultTextValue() async {
-    return await _driver.getText(defaultTextFinder);
-  }
-
   Future<void> clickBtnLogin() async {
     await _driver.tap(btnLogin);
   }
+
+  Future<void> setUserInputText(String vStrUser) async {
+    await _driver.tap(inputUserFinder);
+    await _driver.enterText(vStrUser);
+    return await _driver.waitFor(find.text(vStrUser));
+  }
+
+  Future<void> setPasswordInputText(String vStrPassword) async {
+    await _driver.tap(inputPasswordFinder);
+    await _driver.enterText(vStrPassword);
+    return await _driver.waitFor(find.text(vStrPassword));
+  }
+
+  Future<String> getTextResult() async {
+    return _driver.getText(textResultFinder);
+  }
+
 }

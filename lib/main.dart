@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'TodoApp',
-        initialRoute: 'login',
+        initialRoute: 'item',
         routes: {
           'login': (_) => const LoginView(),
           'project': (_) => const ProjectView(),

@@ -5,12 +5,14 @@ import 'package:test/test.dart';
 
 import '../pages/login_page.dart';
 
-StepDefinitionGeneric initialStateOfApp() {
+StepDefinitionGeneric setValidCredencialsLogin() {
   return given<FlutterWorld>(
-    'I test the initial state of the app',
+    'I set a invalid credencials in login page',
     (context) async {
        LoginPage loginPage = LoginPage(context.world.driver!);
-       context.expectMatch(await loginPage.getDefaultTextValue(), "No existe informacion de Usuario");
+       await loginPage.setUserInputText("user_incorrect");
+       await loginPage.setPasswordInputText("password_incorrect");
+       context.expectMatch(await loginPage.getTextResult(), "");
     },
   );
 }
