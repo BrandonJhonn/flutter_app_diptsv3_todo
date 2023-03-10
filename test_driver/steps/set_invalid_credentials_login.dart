@@ -5,7 +5,7 @@ import 'package:test/test.dart';
 
 import '../pages/login_page.dart';
 
-StepDefinitionGeneric setValidCredencialsLogin() {
+StepDefinitionGeneric setInvalidCredencialsLogin() {
   return given<FlutterWorld>(
     'I set a invalid credencials in login page',
     (context) async {

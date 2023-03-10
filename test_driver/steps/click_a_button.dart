@@ -5,14 +5,12 @@ import 'package:test/test.dart';
 
 import '../pages/login_page.dart';
 
-StepDefinitionGeneric seeIfValueIS() {
-  return when2<String, String, FlutterWorld>(
-    'I see if the value in {string} is {string}',
-    (key, expected, context) async {
-
+StepDefinitionGeneric clickAButton() {
+  return when1<String, FlutterWorld>(
+    'I click the {string} button',
+    (key, context) async {
       final locator = find.byValueKey(key);
-      String actual = await FlutterDriverUtils.getText(context.world.driver!, locator);
-      context.expectMatch(actual, expected);
+      await FlutterDriverUtils.tap(context.world.driver, locator);
     },
   );
 }
