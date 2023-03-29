@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class ItemModel {
   int id;
   String content;
@@ -30,4 +32,32 @@ class ItemModel {
     projectId: projectId ?? this.projectId, 
     priority: priority ?? this.priority
   );
+
+  factory ItemModel.fromJson(Map<String, dynamic> json) {
+    ItemModel obj;
+    try {
+      if (json.isEmpty) {
+        obj = ItemModel(
+          id: 0, 
+          content: "", 
+          itemType: 0, 
+          checked: false, 
+          projectId: 0,
+          priority: 0
+        );
+      } else {
+        obj = ItemModel(
+          id: json['Id'], 
+          content: json['Content'], 
+          itemType: json['ItemType'], 
+          checked: json['Checked'], 
+          projectId: json['ProjectId'],
+          priority: json['Priority']
+        );
+      }
+    } catch (e) {
+      rethrow;
+    }
+    return obj;
+  }
 }

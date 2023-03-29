@@ -20,7 +20,8 @@ class LoginInitialState extends LoginState {
 }
 
 class LoginSetState extends LoginState {
+  final bool status;
   final UserModel newUser;
-  const LoginSetState(this.newUser)
-  :super (isActive: true, user: newUser);
+  const LoginSetState(this.status, this.newUser)
+  :super (isActive: status, user: newUser);
 }

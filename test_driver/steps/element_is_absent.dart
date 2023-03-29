@@ -4,12 +4,13 @@ import 'package:gherkin/gherkin.dart';
 
 import '../pages/login_page.dart';
 
-StepDefinitionGeneric clickAButton() {
-  return when1<String, FlutterWorld>(
-    'I click the {string} button',
+StepDefinitionGeneric elementIsAbsent() {
+  return then1<String, FlutterWorld>(
+    'I see if the control {string} is absent',
     (key, context) async {
       final locator = find.byValueKey(key);
-      await FlutterDriverUtils.tap(context.world.driver, locator, timeout: const Duration(seconds: 3));
+      bool actual = await FlutterDriverUtils.isAbsent(context.world.driver, locator);
+      context.expectMatch(actual, true);
     },
   );
 }

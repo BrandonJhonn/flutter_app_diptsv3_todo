@@ -1,15 +1,16 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
+
 import 'package:flutter/services.dart';
-import 'package:flutter_app_diptsv3_todo/models/user_model.dart';
+import '../models/user_dto.dart';
+import '../models/user_model.dart';
 import 'package:http/http.dart' as http;
 
 import '../utils/global_util.dart' as global;
 
 class LoginService
 {
-  Future<UserModel> loginUser(String vStrUser, String vStrPassword) async {
+  Future<UserDTO> loginUser(String vStrUser, String vStrPassword) async {
     try {
       Codec<String, String> stringToBase64 = utf8.fuse(base64);
 
@@ -22,13 +23,22 @@ class LoginService
       );
 
       if (response.statusCode == 200) {
-        return UserModel.fromJson(jsonDecode(response.body));
+        return UserDTO(
+          strMessage: "Correcto",
+          success: true,
+          oResponse: UserModel.fromJson(jsonDecode(response.body)));
       } else {
-        return UserModel.fromJson({});
+        return UserDTO(
+          strMessage: "Error WS", 
+          success: false, 
+          oResponse: UserModel.fromJson({}));
       }
 
     } on PlatformException catch (e) {
-      rethrow;
+      return UserDTO(
+          strMessage: "Error: \n${e.message}", 
+          success: false, 
+          oResponse: UserModel.fromJson({}));
     }
   }
 }

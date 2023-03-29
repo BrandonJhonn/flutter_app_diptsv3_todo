@@ -10,9 +10,8 @@ StepDefinitionGeneric setValidCredencialsLogin() {
     'I set a valid credencials in login page',
     (context) async {
        LoginPage loginPage = LoginPage(context.world.driver!);
-       await loginPage.setUserInputText("user");
-       await loginPage.setPasswordInputText("password");
-       context.expectMatch(await loginPage.getTextResult(), "");
+       await loginPage.setUserInputText("ucb@diplomado.com");
+       await loginPage.setPasswordInputText("ucbdiplomado");
     },
   );
 }

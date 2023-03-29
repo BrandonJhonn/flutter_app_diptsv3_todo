@@ -1,36 +1,25 @@
 Feature: Items Features
   Test Item CRUD operations
 
-  Background: Login Process
-    Given I am on the Project Page with a valid session
-    And I click on the "btn-detail-1" button in the "lst-projects" list
-
-  Scenario: Test Item List Page
-    Given I am on the Item Page
-    And I click the "btn-refresh" button
-    Then I see if the value in "txt-message" is "Lista Actualizada"
+  Background: Login Process And Show the Project Page
+    Given I set a valid credencials in login page
+    And I click the "btn-login" button
+    Then I see if the value in "page-title" is "PROJECTS"
+    And I click the "btn-show-Personal" button
+    Then I see if the value in "page-title" is "Personal"
 
   Scenario: Test Item Create Form
-    Given I am on the Item Page
-    And I click the "btn-new" button
-    And I fill the "txt-name-item" field with "T-TEST-01"
+    Given I click the "btn-new" button
+    And I fill the "frm-content" field with "A new task to do"
     And I click the "btn-save" button
-    Then I see if the value in "txt-message" is "Actividad Creada"
+    Then I see if the value in "A new task to do" is "A new task to do"
 
   Scenario: Test Item Update Form
-    Given I am on the Item Page
-    And I click on the "btn-edit-1" button in the "lst-items" list
-    And I fill the "txt-name-item" field with "T-TEST-01-UPDATE"
+    Given I click the "btn-edit-A new task to do" button
+    And I fill the "frm-content" field with "A new task to do updated"
     And I click the "btn-save" button
-    Then I see if the value in "txt-message" is "Actividad Actualizada"
-
-  Scenario: Test Item Detail Page
-    Given I am on the Item Page
-    And I click on the "btn-detail-1" button in the "lst-items" list
-    Then I see if the value in "txt-title-page" is "T-TEST-01-UPDATE"
+    Then I see if the value in "A new task to do updated" is "A new task to do updated"
 
   Scenario: Test Item Delete Form
-    Given I am on the Item Page
-    And I click on the "btn-delete-1" button in the "lst-items" list
-    And I click the "btn-confirm" button
-    Then I see if the value in "txt-message" is "Actividad Eliminada"
+    Given I click the "btn-delete-A new task to do updated" button
+    Then I see if the control "A new task to do updated" is absent

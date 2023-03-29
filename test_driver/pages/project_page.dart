@@ -2,6 +2,7 @@ import 'package:flutter_driver/flutter_driver.dart';
 
 class ProjectPage {
 
+  final pageTitle = find.byValueKey('page-title');
   final cardProjectIdFinder = find.byValueKey('card-detail');
   final btnEditFinder = find.byValueKey('btn-edit');
   final btnDeleteFinder = find.byValueKey('btn-delete');
@@ -34,5 +35,9 @@ class ProjectPage {
 
   Future<void> clickBtnSave() async {
     await _driver.tap(btnSaveFinder);
+  }
+
+  Future<String> getTextResult() async {
+    return _driver.getText(pageTitle);
   }
 }

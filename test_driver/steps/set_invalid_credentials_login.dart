@@ -12,7 +12,6 @@ StepDefinitionGeneric setInvalidCredencialsLogin() {
        LoginPage loginPage = LoginPage(context.world.driver!);
        await loginPage.setUserInputText("user_incorrect");
        await loginPage.setPasswordInputText("password_incorrect");
-       context.expectMatch(await loginPage.getTextResult(), "");
     },
   );
 }

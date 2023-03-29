@@ -30,8 +30,8 @@ class UserModel {
         );
       } else {
         obj = UserModel(
-          email: json['UserEmail'], 
-          token: json['TokenString'], 
+          email: json['UserEmail'] ?? "", 
+          token: json['TokenString'] ?? "", 
           expirationTime: DateTime.now()
         );
       }

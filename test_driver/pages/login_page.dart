@@ -5,7 +5,6 @@ class LoginPage {
   final inputUserFinder = find.byValueKey('frm-user');
   final inputPasswordFinder = find.byValueKey('frm-password');
   final btnLogin = find.byValueKey('btn-login');
-  final textResultFinder = find.byValueKey('txt-result');
 
   late FlutterDriver _driver;
 
@@ -28,9 +27,4 @@ class LoginPage {
     await _driver.enterText(vStrPassword);
     return await _driver.waitFor(find.text(vStrPassword));
   }
-
-  Future<String> getTextResult() async {
-    return _driver.getText(textResultFinder);
-  }
-
 }

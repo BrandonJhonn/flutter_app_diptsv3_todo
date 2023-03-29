@@ -1,9 +1,9 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../bloc/login/login_bloc.dart';
 import '../../utils/global_util.dart' as global;
+import '../../views/project/project_view.dart';
 import '../../views/widgets/toast_widget.dart' as alert;
 
 
@@ -35,13 +35,24 @@ class LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
-    Codec<String, String> stringToBase64 = utf8.fuse(base64);
     final loginBloc = BlocProvider.of<LoginBloc>(context, listen: false);
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      body: BlocBuilder<LoginBloc, LoginState>(
+      body: BlocConsumer<LoginBloc, LoginState>(
+        bloc: BlocProvider.of<LoginBloc>(context),
+        listener: (_, state) {
+          if (state.isActive) 
+          {
+            Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                builder: (BuildContext context) => ProjectView(vStrToken: state.user!.token)
+              ), 
+              (Route<dynamic> route) => false,
+            );
+          }
+        },
         builder: (_, state) {
           return Scaffold(
             backgroundColor: Colors.white,
@@ -91,15 +102,8 @@ class LoginViewState extends State<LoginView> {
                           ElevatedButton(
                             key: const ValueKey('btn-login'),
                             style: ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20)),
-                            onPressed: () {
+                            onPressed: () async {
                               loginBloc.add(LoginUser(ctrUsuario.text, ctrPassword.text));
-
-                              if (state.isActive) {
-                                alert.ToastAlertUtil.alertaToast("Acceso Correcto", true);
-                              }
-                              else {
-                                alert.ToastAlertUtil.alertaToast("Acceso Incorrecto", false);
-                              }
                             },
                             child: const Text('Ingresar'),
                           ),
@@ -111,7 +115,7 @@ class LoginViewState extends State<LoginView> {
               ),
             ),
           );
-        },
+        }
       )
     );
   }
