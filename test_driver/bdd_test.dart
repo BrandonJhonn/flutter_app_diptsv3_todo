@@ -15,7 +15,7 @@ Future<void> main() {
     ..reporters = [
       ProgressReporter(),
       TestRunSummaryReporter(),
-      JsonReporter(path: './report.json')
+      JsonReporter(path: './report/report.json')
     ] // you can include the "StdoutReporter()" without the message level parameter for verbose log information
     ..stepDefinitions = [
       setValidCredencialsLogin(), 
