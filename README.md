@@ -54,6 +54,11 @@ node index.js
 
 ![image](https://user-images.githubusercontent.com/66140035/229657499-2bbf6346-5441-461c-ac04-3d8c6f16a316.png)
 
+- A report to review the results
+
+![image](https://user-images.githubusercontent.com/66140035/229658046-9e46075c-0586-4c21-a58d-3fa8bafafc1e.png)
+
+
 ## Aditional
 
 This project is a starting point for a Flutter application.
